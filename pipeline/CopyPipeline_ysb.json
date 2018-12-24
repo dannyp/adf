@@ -1,0 +1,156 @@
+{
+	"name": "CopyPipeline_ysb",
+	"properties": {
+		"activities": [
+			{
+				"name": "ForEach_ysb",
+				"type": "ForEach",
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.cw_items",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Copy_ysb",
+							"type": "Copy",
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [
+								{
+									"name": "Source",
+									"value": "@{item().source.tableName}"
+								},
+								{
+									"name": "Destination",
+									"value": "raw/@{item().destination.fileName}"
+								}
+							],
+							"typeProperties": {
+								"source": {
+									"type": "SqlSource"
+								},
+								"sink": {
+									"type": "BlobSink"
+								},
+								"enableStaging": false,
+								"dataIntegrationUnits": 0
+							},
+							"inputs": [
+								{
+									"referenceName": "SourceDataset_ysb",
+									"type": "DatasetReference",
+									"parameters": {
+										"cw_tableName": "@item().source.tableName"
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DestinationDataset_ysb",
+									"type": "DatasetReference",
+									"parameters": {
+										"cw_fileName": "@item().destination.fileName"
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"cw_items": {
+				"type": "Array",
+				"defaultValue": [
+					{
+						"source": {
+							"tableName": "[SalesLT].[Address]"
+						},
+						"destination": {
+							"fileName": "[SalesLT].[Address].csv"
+						}
+					},
+					{
+						"source": {
+							"tableName": "[SalesLT].[Customer]"
+						},
+						"destination": {
+							"fileName": "[SalesLT].[Customer].csv"
+						}
+					},
+					{
+						"source": {
+							"tableName": "[SalesLT].[CustomerAddress]"
+						},
+						"destination": {
+							"fileName": "[SalesLT].[CustomerAddress].csv"
+						}
+					},
+					{
+						"source": {
+							"tableName": "[SalesLT].[Product]"
+						},
+						"destination": {
+							"fileName": "[SalesLT].[Product].csv"
+						}
+					},
+					{
+						"source": {
+							"tableName": "[SalesLT].[ProductCategory]"
+						},
+						"destination": {
+							"fileName": "[SalesLT].[ProductCategory].csv"
+						}
+					},
+					{
+						"source": {
+							"tableName": "[SalesLT].[ProductDescription]"
+						},
+						"destination": {
+							"fileName": "[SalesLT].[ProductDescription].csv"
+						}
+					},
+					{
+						"source": {
+							"tableName": "[SalesLT].[ProductModel]"
+						},
+						"destination": {
+							"fileName": "[SalesLT].[ProductModel].csv"
+						}
+					},
+					{
+						"source": {
+							"tableName": "[SalesLT].[ProductModelProductDescription]"
+						},
+						"destination": {
+							"fileName": "[SalesLT].[ProductModelProductDescription].csv"
+						}
+					},
+					{
+						"source": {
+							"tableName": "[SalesLT].[SalesOrderDetail]"
+						},
+						"destination": {
+							"fileName": "[SalesLT].[SalesOrderDetail].csv"
+						}
+					},
+					{
+						"source": {
+							"tableName": "[SalesLT].[SalesOrderHeader]"
+						},
+						"destination": {
+							"fileName": "[SalesLT].[SalesOrderHeader].csv"
+						}
+					}
+				]
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
