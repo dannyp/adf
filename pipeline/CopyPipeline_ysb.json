@@ -5,9 +5,17 @@
 			{
 				"name": "ForEach_ysb",
 				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Lookup1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"typeProperties": {
 					"items": {
-						"value": "@pipeline().parameters.cw_items",
+						"value": "@activity('Lookup1').output",
 						"type": "Expression"
 					},
 					"activities": [
@@ -61,6 +69,27 @@
 							]
 						}
 					]
+				}
+			},
+			{
+				"name": "Lookup1",
+				"type": "Lookup",
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"typeProperties": {
+					"source": {
+						"type": "SqlSource"
+					},
+					"dataset": {
+						"referenceName": "AllTables",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
 				}
 			}
 		],
