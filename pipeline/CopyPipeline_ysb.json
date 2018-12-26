@@ -36,7 +36,7 @@
 								},
 								{
 									"name": "Destination",
-									"value": "raw/@{item().TableName.concat(\".parquet\")}"
+									"value": "raw/@{concat(string(item().TableName), '.parquet')}"
 								}
 							],
 							"typeProperties": {
@@ -64,7 +64,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"cw_fileName": {
-											"value": "@item().TableName.concat(\".parquet\")",
+											"value": "@concat(string(item().TableName), '.parquet')",
 											"type": "Expression"
 										}
 									}
