@@ -32,11 +32,11 @@
 							"userProperties": [
 								{
 									"name": "Source",
-									"value": "@{item().source.tableName}"
+									"value": "@{item().TableName}"
 								},
 								{
 									"name": "Destination",
-									"value": "raw/@{item().destination.fileName}"
+									"value": "raw/@{item().TableName.concat(\".parquet\")}"
 								}
 							],
 							"typeProperties": {
@@ -54,7 +54,7 @@
 									"referenceName": "SourceDataset_ysb",
 									"type": "DatasetReference",
 									"parameters": {
-										"cw_tableName": "@item().source.tableName"
+										"cw_tableName": "@item().TableName"
 									}
 								}
 							],
@@ -63,7 +63,10 @@
 									"referenceName": "DestinationDataset_ysb",
 									"type": "DatasetReference",
 									"parameters": {
-										"cw_fileName": "@item().destination.fileName"
+										"cw_fileName": {
+											"value": "@item().TableName.concat(\".parquet\")",
+											"type": "Expression"
+										}
 									}
 								}
 							]
