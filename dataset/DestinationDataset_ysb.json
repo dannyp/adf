@@ -13,7 +13,7 @@
 		"type": "AzureBlob",
 		"typeProperties": {
 			"format": {
-				"type": "ParquetFormat"
+				"type": "AvroFormat"
 			},
 			"fileName": {
 				"value": "@dataset().cw_fileName",
