@@ -1,0 +1,6 @@
+{
+	"name": "DataWarehouseIntegrationRuntime",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}

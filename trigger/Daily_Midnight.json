@@ -1,0 +1,33 @@
+{
+	"name": "Daily_Midnight",
+	"properties": {
+		"description": "Daily trigger that runs at +09:30 UTC. During daylight savings, pipelines that use this trigger will need to cater for the fact that +09:30 is 11:00pm.",
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "Reset Process Framework",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2019-06-16T00:00:00Z",
+				"timeZone": "UTC",
+				"schedule": {
+					"minutes": [
+						30
+					],
+					"hours": [
+						14
+					]
+				}
+			}
+		}
+	}
+}

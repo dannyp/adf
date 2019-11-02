@@ -1,0 +1,54 @@
+{
+	"name": "Hourly",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "_Process Type 1 - Azure SQL DB to Blob",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"EntityGroupKeyList": "2"
+				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "_Process Type 2 - Process History and Changeset",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"EntityGroupKeyList": "2"
+				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "_Process Type 3 - Update Delta Lake",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"EntityGroupKeyList": "2"
+				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "_Process Type 4 - Update Data Warehouse",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"EntityGroupKeyList": "2"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Hour",
+				"interval": 1,
+				"startTime": "2019-06-21T00:00:00Z",
+				"timeZone": "UTC"
+			}
+		}
+	}
+}
